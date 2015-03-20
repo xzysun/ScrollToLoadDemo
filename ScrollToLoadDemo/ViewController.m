@@ -28,6 +28,7 @@
         NSLog(@"trigger load more!!!");
         [self loadData];
     }];
+    self.tableView.loadMoreFooterTriggerHeight = 44.0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +53,7 @@
 - (IBAction)rightButtonAction:(id)sender
 {
     NSLog(@"切换开关");
-    [self.tableView setLoadMoreFooterEnabled:!self.tableView.loadMoreFooterEnabled];
+    self.tableView.loadMoreFooterEnabled = !self.tableView.loadMoreFooterEnabled;
 }
 
 #pragma mark - TableView

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  在UIScrollView上增加上拉加载更多的控件
+ */
 @interface UIScrollView (ScrollToLoad)
 
-#pragma mark - 添加/删除视图
+#pragma mark - 添加/删除控件
 /**
  *  添加一个加载更多的Footer
  *
@@ -31,7 +34,7 @@
  */
 -(void)removeLoadMoreFooter;
 
-#pragma mark - 控制视图
+#pragma mark - 控制控件的功能
 /**
  *  触发加载更多的读取状态
  */
@@ -44,24 +47,20 @@
 
 /**
  *  控制是否允许触发加载更多，如果不允许，则点击无效果且显示loadMoreFooterDisabledText
- *
- *  @param enabled 是否允许的标识
  */
--(void)setLoadMoreFooterEnabled:(BOOL)enabled;
-
-/**
- *  获取当前加载更多Footer的允许状态
- *
- *  @return 允许状态
- */
--(BOOL)loadMoreFooterEnabled;
+@property (nonatomic, assign) BOOL loadMoreFooterEnabled;
 
 /**
  *  上拉刷新头部控件的可见性
  */
 @property (nonatomic, assign) BOOL loadMoreFooterHidden;
 
-#pragma mark - 定义视图效果
+/**
+ *  上拉刷新的触发距离，即触发的时候距控件的高度，默认为0
+ */
+@property (nonatomic, assign) CGFloat loadMoreFooterTriggerHeight;
+
+#pragma mark - 定义控件的显示
 /**
  *  普通状态下的文本
  */

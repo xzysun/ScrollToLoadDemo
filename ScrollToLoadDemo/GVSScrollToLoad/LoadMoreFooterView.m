@@ -52,6 +52,7 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
         [self addGestureRecognizer:tapGesture];
         self.enabled = YES;
         self.buttonMode = NO;
+        self.triggerHeight = 0.0;
         self.loadingText = kLoadMoreDefaultLoadingText;
         self.normalText = kLoadMoreDefaultNormalText;
         self.disabledText = kLoadMoreDefaultDisableText;
@@ -158,10 +159,10 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
     CGFloat currentOffsetY = self.scrollView.contentOffset.y;
     // 尾部控件刚好出现的offsetY
     CGFloat happenOffsetY = [self happenOffsetY];
-    // 如果是向下滚动到看不见尾部控件，直接返回
-    if (currentOffsetY <= happenOffsetY) return;
+//     //如果是向下滚动到看不见尾部控件，直接返回
+//    if (currentOffsetY <= happenOffsetY) return;
     //触发点
-    CGFloat normal2loadingOffsetY = happenOffsetY;
+    CGFloat normal2loadingOffsetY = happenOffsetY - self.triggerHeight;
     if (self.state == LoadMoreStateNormal && currentOffsetY > normal2loadingOffsetY) {
         //触发读取
         self.state = LoadMoreStateLoading;

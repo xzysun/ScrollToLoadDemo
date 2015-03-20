@@ -47,6 +47,10 @@ typedef enum {
  */
 @property (nonatomic, assign) BOOL enabled;
 /**
+ *  触发时候距离显示出控件的高度，默认是0，也就是显示出控件的瞬间触发
+ */
+@property (nonatomic, assign) CGFloat triggerHeight;
+/**
  *  开始读取
  */
 - (void)beginLoading;

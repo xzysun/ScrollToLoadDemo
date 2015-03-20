@@ -91,6 +91,16 @@ static char ScrollToLoadFooterViewKey;
     return self.loadMoreFooter.hidden;
 }
 
+-(CGFloat)loadMoreFooterTriggerHeight
+{
+    return self.loadMoreFooter.triggerHeight;
+}
+
+-(void)setLoadMoreFooterTriggerHeight:(CGFloat)loadMoreFooterTriggerHeight
+{
+    self.loadMoreFooter.triggerHeight = loadMoreFooterTriggerHeight;
+}
+
 #pragma mark - 定义视图效果
 -(NSString *)loadMoreFooterNormalText
 {
