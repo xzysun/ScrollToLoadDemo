@@ -1,0 +1,10 @@
+# Xcode
+.DS_Store
+build/
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+pods/
+*.xcuserstate
