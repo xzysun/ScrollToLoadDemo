@@ -13,6 +13,7 @@
 #define msgSend(...) ((void (*)(void *, SEL, UIView *))objc_msgSend)(__VA_ARGS__)
 #define msgTarget(target) (__bridge void *)(target)
 #define LoadMoreLabelDefaultTextColor [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1.0]
+#define LoadMoreLabelDefaultTextFont [UIFont boldSystemFontOfSize:13.0]
 static CGFloat const kLoadMoreViewHeight = 64.0;
 static NSString *const kLoadMoreContentOffset = @"contentOffset";
 static NSString *const kLoadMoreContentSize = @"contentSize";
@@ -40,11 +41,12 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
         //初始化控件
         UILabel *statusLabel = [[UILabel alloc] init];
         statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        statusLabel.font = [UIFont boldSystemFontOfSize:13];
+        statusLabel.font = LoadMoreLabelDefaultTextFont;
         statusLabel.textColor = LoadMoreLabelDefaultTextColor;
         statusLabel.backgroundColor = [UIColor clearColor];
         statusLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_statusLabel = statusLabel];
+        _statusLabel = statusLabel;
+        [self addSubview:_statusLabel];
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [self addSubview:_activityView = activityView];
@@ -332,5 +334,11 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
     _textColor = [textColor copy];
     self.statusLabel.textColor = textColor;
     self.activityView.color = textColor;
+}
+
+-(void)setTextFont:(UIFont *)textFont
+{
+    _textFont = [textFont copy];
+    self.statusLabel.font = textFont;
 }
 @end

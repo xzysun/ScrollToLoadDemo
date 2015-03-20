@@ -78,6 +78,10 @@
  */
 @property (nonatomic, copy) UIColor *loadMoreFooterTextColor;
 /**
+ *  文本的字体，默认为13.0
+ */
+@property (nonatomic, copy) UIFont *loadMoreFooterTextFont;
+/**
  *  背景的颜色，默认透明
  */
 @property (copy, nonatomic) UIColor  *loadMoreFooterBackgroundColor;

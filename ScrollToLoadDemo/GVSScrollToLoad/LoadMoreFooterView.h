@@ -76,4 +76,8 @@ typedef enum {
  *  颜色
  */
 @property (copy, nonatomic) UIColor *textColor;
+/**
+ *  字体
+ */
+@property (copy, nonatomic) UIFont *textFont;
 @end

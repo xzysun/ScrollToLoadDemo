@@ -29,6 +29,7 @@
         [self loadData];
     }];
     self.tableView.loadMoreFooterTriggerHeight = 44.0;
+    self.tableView.loadMoreFooterTextFont = [UIFont systemFontOfSize:14.0];
 }
 
 - (void)didReceiveMemoryWarning {

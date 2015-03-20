@@ -142,6 +142,16 @@ static char ScrollToLoadFooterViewKey;
     self.loadMoreFooter.textColor = textColor;
 }
 
+-(UIFont *)loadMoreFooterTextFont
+{
+    return self.loadMoreFooter.textFont;
+}
+
+-(void)setLoadMoreFooterTextFont:(UIFont *)loadMoreFooterTextFont
+{
+    self.loadMoreFooter.textFont = loadMoreFooterTextFont;
+}
+
 -(UIColor *)loadMoreFooterBackgroundColor
 {
     return self.loadMoreFooter.backgroundColor;
