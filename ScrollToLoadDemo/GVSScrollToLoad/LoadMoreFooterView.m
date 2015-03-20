@@ -17,6 +17,7 @@
 static CGFloat const kLoadMoreViewHeight = 64.0;
 static NSString *const kLoadMoreContentOffset = @"contentOffset";
 static NSString *const kLoadMoreContentSize = @"contentSize";
+static NSString *const kLoadMoreContentInset = @"contentInset";
 static NSString *const kLoadMoreDefaultLoadingText = @"正在加载更多...";
 static NSString *const kLoadMoreDefaultNormalText = @"点击以加载更多";
 static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
@@ -79,9 +80,11 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
     //移入新的视图中
     [self.superview removeObserver:self forKeyPath:kLoadMoreContentOffset context:nil];
     [self.superview removeObserver:self forKeyPath:kLoadMoreContentSize context:nil];
+    [self.superview removeObserver:self forKeyPath:kLoadMoreContentInset context:nil];
     if (newSuperview) {
         [newSuperview addObserver:self forKeyPath:kLoadMoreContentOffset options:NSKeyValueObservingOptionNew context:nil];
         [newSuperview addObserver:self forKeyPath:kLoadMoreContentSize options:NSKeyValueObservingOptionNew context:nil];
+        [newSuperview addObserver:self forKeyPath:kLoadMoreContentInset options:NSKeyValueObservingOptionNew context:nil];
         //调整位置
         CGRect frame = self.frame;
         frame.origin.x = 0;
@@ -108,7 +111,11 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
 //    if (!self.userInteractionEnabled || self.alpha <= 0.01 || self.hidden) {
 //        return;
 //    }
-    if ([kLoadMoreContentSize isEqualToString:keyPath]) {
+    if ([kLoadMoreContentInset isEqualToString:keyPath]) {
+        //ContentInsets发生了变化，可能需要调整frame
+        _scrollViewOriginalInset = _scrollView.contentInset;
+        [self adjustFrameWithContentSize];
+    } else if ([kLoadMoreContentSize isEqualToString:keyPath]) {
         // 调整frame
         [self adjustFrameWithContentSize];
     } else if ([kLoadMoreContentOffset isEqualToString:keyPath]) {
@@ -136,14 +143,14 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
     CGFloat contentHeight = self.scrollView.contentSize.height;
     // 表格的高度
     CGFloat scrollHeight = CGRectGetHeight(self.scrollView.frame) - self.scrollViewOriginalInset.top - self.scrollViewOriginalInset.bottom;
-    if (CGRectGetMaxY(self.frame) == contentHeight) {
-        //在内容分的最底下，不用调整了
-        return;
-    }
-    if (contentHeight < scrollHeight) {
+    if (contentHeight <= scrollHeight) {
         self.buttonMode = YES;
     } else {
         self.buttonMode = NO;
+    }
+    if (CGRectGetMaxY(self.frame) == contentHeight) {
+        //在内容分的最底下，不用调整了
+        return;
     }
     // 调整位置
     CGRect frame = self.frame;
