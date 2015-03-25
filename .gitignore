@@ -8,3 +8,5 @@ DerivedData
 .idea/
 pods/
 *.xcuserstate
+
+*.xccheckout

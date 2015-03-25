@@ -119,6 +119,10 @@ static NSString *const kLoadMoreDefaultDisableText = @"没有更多数据了";
         // 调整frame
         [self adjustFrameWithContentSize];
     } else if ([kLoadMoreContentOffset isEqualToString:keyPath]) {
+        //不是用户操作触发的
+        if (!_scrollView.dragging) {
+            return;
+        }
         // 如果正在刷新，直接返回
         if (self.state == LoadMoreStateLoading) {
             return;
